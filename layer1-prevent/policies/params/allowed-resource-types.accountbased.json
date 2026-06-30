@@ -1,0 +1,14 @@
+{
+  "listOfResourceTypesAllowed": {
+    "value": [
+      "microsoft.cognitiveservices/accounts",
+      "microsoft.cognitiveservices/accounts/deployments",
+      "microsoft.storage/storageaccounts",
+      "microsoft.insights/components",
+      "microsoft.insights/actiongroups",
+      "microsoft.operationalinsights/workspaces",
+      "microsoft.network/privateendpoints",
+      "microsoft.network/privatednszones"
+    ]
+  }
+}

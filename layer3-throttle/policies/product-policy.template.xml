@@ -1,0 +1,19 @@
+<policies>
+    <inbound>
+        <base />
+        <!-- Camada 3: rate limit de token POR TIME (Product). Os placeholders {{TPM}},
+             {{QUOTA}} e {{PERIOD}} sao substituidos pelo 04-create-products.ps1 a partir
+             do teams.json. Em product scope, os atributos *-header-name e retry-after-*
+             NAO sao permitidos: o status 429 (TPM) / 403 (quota) e o header Retry-After
+             saem automaticamente. -->
+        <llm-token-limit
+            counter-key="@(context.Subscription.Id)"
+            tokens-per-minute="{{TPM}}"
+            token-quota="{{QUOTA}}"
+            token-quota-period="{{PERIOD}}"
+            estimate-prompt-tokens="false" />
+    </inbound>
+    <outbound>
+        <base />
+    </outbound>
+</policies>

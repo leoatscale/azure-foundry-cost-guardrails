@@ -1,0 +1,56 @@
+{
+  "properties": {
+    "displayName": "Deny Azure ML compute com VM GPU (hub-based Foundry)",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Cenario HUB-BASED. O mesmo tipo workspaces hospeda compute. Nega AmlCompute e ComputeInstance com vmSize de familia GPU (NC/ND/NV/NG), que sobe VM por hora 24/7. Verifique os aliases no seu ambiente com: az policy alias list --namespace Microsoft.MachineLearningServices.",
+    "metadata": { "category": "Cost Governance", "version": "1.0.0" },
+    "parameters": {
+      "deniedVmPatterns": {
+        "type": "Array",
+        "metadata": { "displayName": "Padroes de vmSize negados (familias GPU)" },
+        "defaultValue": [ "Standard_NC*", "Standard_ND*", "Standard_NV*", "Standard_NG*" ]
+      },
+      "effect": {
+        "type": "String",
+        "allowedValues": [ "Deny", "Audit", "Disabled" ],
+        "defaultValue": "Deny",
+        "metadata": { "displayName": "Effect" }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          { "field": "type", "equals": "Microsoft.MachineLearningServices/workspaces/computes" },
+          {
+            "anyOf": [
+              {
+                "count": {
+                  "value": "[parameters('deniedVmPatterns')]",
+                  "name": "p",
+                  "where": {
+                    "field": "Microsoft.MachineLearningServices/workspaces/computes/AmlCompute.vmSize",
+                    "like": "[current('p')]"
+                  }
+                },
+                "greater": 0
+              },
+              {
+                "count": {
+                  "value": "[parameters('deniedVmPatterns')]",
+                  "name": "p2",
+                  "where": {
+                    "field": "Microsoft.MachineLearningServices/workspaces/computes/ComputeInstance.vmSize",
+                    "like": "[current('p2')]"
+                  }
+                },
+                "greater": 0
+              }
+            ]
+          }
+        ]
+      },
+      "then": { "effect": "[parameters('effect')]" }
+    }
+  }
+}

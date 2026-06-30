@@ -1,0 +1,5 @@
+{
+  "effect": { "value": "Deny" },
+  "allowedPublishers": { "value": [ "OpenAI", "Microsoft" ] },
+  "allowedAssetIds": { "value": [] }
+}

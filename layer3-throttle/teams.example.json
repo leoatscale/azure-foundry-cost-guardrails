@@ -1,0 +1,4 @@
+[
+  { "product": "team-dev",  "displayName": "Team Dev",  "tokensPerMinute": 10000, "tokenQuota": 5000000,  "tokenQuotaPeriod": "Monthly" },
+  { "product": "team-prod", "displayName": "Team Prod", "tokensPerMinute": 50000, "tokenQuota": 50000000, "tokenQuotaPeriod": "Monthly" }
+]

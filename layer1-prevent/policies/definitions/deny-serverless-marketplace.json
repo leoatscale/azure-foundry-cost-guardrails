@@ -1,0 +1,34 @@
+{
+  "properties": {
+    "displayName": "Deny endpoints serverless / Marketplace MaaS (hub-based Foundry)",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Cenario HUB-BASED. Nega tipos de recurso que sobem modelos de terceiro / serverless / Marketplace fora do controle do gateway e da policy de SKU. Ajuste a lista conforme o catalogo que voce quer permitir.",
+    "metadata": { "category": "Cost Governance", "version": "1.0.0" },
+    "parameters": {
+      "deniedTypes": {
+        "type": "Array",
+        "metadata": { "displayName": "Tipos negados" },
+        "defaultValue": [
+          "Microsoft.MachineLearningServices/workspaces/serverlessEndpoints",
+          "Microsoft.MachineLearningServices/workspaces/marketplaceSubscriptions",
+          "Microsoft.SaaS/resources",
+          "Microsoft.SaaS/saasresources"
+        ]
+      },
+      "effect": {
+        "type": "String",
+        "allowedValues": [ "Deny", "Audit", "Disabled" ],
+        "defaultValue": "Deny",
+        "metadata": { "displayName": "Effect" }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "in": "[parameters('deniedTypes')]"
+      },
+      "then": { "effect": "[parameters('effect')]" }
+    }
+  }
+}

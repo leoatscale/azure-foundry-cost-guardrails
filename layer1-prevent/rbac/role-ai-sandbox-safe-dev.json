@@ -1,0 +1,31 @@
+{
+  "Name": "AI Sandbox Safe Dev",
+  "IsCustom": true,
+  "Description": "Dev de sandbox de IA. Cria e gerencia deployments Standard no Foundry pre-provisionado e le observabilidade. NAO mexe em RBAC, quota, capacity, billing, nem altera a conta do Foundry. Sem listKeys: forca uso via gateway.",
+  "Actions": [
+    "Microsoft.Resources/subscriptions/resourceGroups/read",
+    "Microsoft.Resources/deployments/*",
+    "Microsoft.CognitiveServices/accounts/read",
+    "Microsoft.CognitiveServices/accounts/models/read",
+    "Microsoft.CognitiveServices/accounts/deployments/read",
+    "Microsoft.CognitiveServices/accounts/deployments/write",
+    "Microsoft.CognitiveServices/accounts/deployments/delete",
+    "Microsoft.Insights/components/read",
+    "Microsoft.Insights/components/query/read",
+    "Microsoft.OperationalInsights/workspaces/read"
+  ],
+  "NotActions": [
+    "Microsoft.Authorization/*/write",
+    "Microsoft.Authorization/*/delete",
+    "Microsoft.Authorization/elevateAccess/Action",
+    "Microsoft.Quota/*",
+    "Microsoft.Capacity/*",
+    "Microsoft.Commerce/*",
+    "Microsoft.Billing/*",
+    "Microsoft.CognitiveServices/accounts/write",
+    "Microsoft.CognitiveServices/accounts/delete",
+    "Microsoft.CognitiveServices/accounts/listKeys/action",
+    "Microsoft.CognitiveServices/accounts/regenerateKey/action"
+  ],
+  "AssignableScopes": [ "/subscriptions/<SUA_SUBSCRIPTION_ID>" ]
+}

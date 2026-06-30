@@ -1,0 +1,31 @@
+{
+  "properties": {
+    "displayName": "Deny Foundry deployment com SKU provisionado (mata PTU)",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Nega criacao de deployments do Cognitive Services / Foundry cujo SKU nao esteja na lista permitida. Bloqueia ProvisionedManaged / PTU, que cobra capacidade reservada por hora independente de token.",
+    "metadata": { "category": "Cost Governance", "version": "1.0.0" },
+    "parameters": {
+      "allowedSkus": {
+        "type": "Array",
+        "metadata": { "displayName": "SKUs permitidos", "description": "Apenas modos de consumo por token." },
+        "defaultValue": [ "Standard", "GlobalStandard", "DataZoneStandard" ]
+      },
+      "effect": {
+        "type": "String",
+        "allowedValues": [ "Deny", "Audit", "Disabled" ],
+        "defaultValue": "Deny",
+        "metadata": { "displayName": "Effect" }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          { "field": "type", "equals": "Microsoft.CognitiveServices/accounts/deployments" },
+          { "not": { "field": "Microsoft.CognitiveServices/accounts/deployments/sku.name", "in": "[parameters('allowedSkus')]" } }
+        ]
+      },
+      "then": { "effect": "[parameters('effect')]" }
+    }
+  }
+}

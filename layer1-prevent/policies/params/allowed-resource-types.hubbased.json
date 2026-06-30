@@ -1,0 +1,19 @@
+{
+  "listOfResourceTypesAllowed": {
+    "value": [
+      "microsoft.machinelearningservices/workspaces",
+      "microsoft.machinelearningservices/workspaces/computes",
+      "microsoft.machinelearningservices/workspaces/onlineendpoints",
+      "microsoft.cognitiveservices/accounts",
+      "microsoft.cognitiveservices/accounts/deployments",
+      "microsoft.storage/storageaccounts",
+      "microsoft.keyvault/vaults",
+      "microsoft.containerregistry/registries",
+      "microsoft.insights/components",
+      "microsoft.insights/actiongroups",
+      "microsoft.operationalinsights/workspaces",
+      "microsoft.network/privateendpoints",
+      "microsoft.network/privatednszones"
+    ]
+  }
+}

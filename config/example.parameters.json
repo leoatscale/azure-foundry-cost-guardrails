@@ -1,0 +1,30 @@
+{
+  "comum": {
+    "subscriptionId": "<SUA_SUBSCRIPTION_ID>",
+    "resourceGroup": "rg-dev-sandbox-01",
+    "location": "eastus",
+    "scenario": "accountbased",
+    "alertEmail": "voce@empresa.com"
+  },
+  "layer1_prevent": {
+    "effect": "Audit",
+    "allowedSkus": ["Standard", "GlobalStandard", "DataZoneStandard"],
+    "enableApprovedModels": false,
+    "allowedPublishers": ["OpenAI", "Microsoft"]
+  },
+  "layer3_throttle": {
+    "apimName": "apim-foundry-gw-01",
+    "sku": "StandardV2",
+    "publisherName": "Plataforma",
+    "publisherEmail": "plataforma@empresa.com",
+    "foundryName": "<NOME_DO_SEU_FOUNDRY>",
+    "foundryResourceGroup": "<RG_DO_SEU_FOUNDRY>",
+    "apiPath": "foundry",
+    "teamsFile": "layer3-throttle/teams.json"
+  },
+  "layer4_contain": {
+    "budgetAmount": 500,
+    "actualThresholds": [50, 75, 90, 100],
+    "forecastThresholds": [100]
+  }
+}

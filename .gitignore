@@ -1,0 +1,12 @@
+# temp / local
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+node_modules/
+# az / pwsh local context
+.azure/
+*.local.json
+# Camada 3: estado local e chaves geradas (nunca versionar)
+layer3-throttle/.state.json
+layer3-throttle/teams.json
